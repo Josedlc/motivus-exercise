@@ -19,6 +19,11 @@ public class Producto {
     private String descripcion;
     private BigDecimal precio;
 
-    @Column(name = "fecha_creacion")
+    @Column(name = "fecha_creacion", updatable = false)
     private LocalDateTime fechaCreacion;
+
+    @PrePersist
+    protected void onCreate() {
+        this.fechaCreacion = LocalDateTime.now();
+    }
 }
