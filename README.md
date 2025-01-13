@@ -74,7 +74,7 @@ Se diseñó un sistema de notificaciones basado en eventos.
 
 ---
 
-### 4. [Sistema de Autenticación JWT](https://github.com/Josedlc/motivus-exercise/tree/4-autenticacion-jwt)
+### 4. [Sistema de Autenticación JWT](https://github.com/Josedlc/motivus-exercise/tree/4-autenticacion-oauth)
 
 Se implementó un sistema básico de autenticación JWT.
 
@@ -82,11 +82,13 @@ Se implementó un sistema básico de autenticación JWT.
 - Crear un servicio que permita registrar usuarios con credenciales.
 - Implementar login para generar un JWT.
 - Proteger endpoints con autenticación basada en roles (por ejemplo, ADMIN, USER).
+- Opcional: Habilitar integración con OAuth2 (Google o GitHub).
 
 ### Endpoints
 
 - **Registrar Usuario**: `POST http://localhost:8080/backend/api/v1/api/auth/register`
 - **Login**: `POST http://localhost:8080/backend/api/v1/api/auth/login`
+- **Login Github**: `GET http://localhost:8080/backend/api/v1/oauth2/authorization/github`
 - **Endpoints solo para ADMIN**:
   - **Actualizar Usuario**: `PUT http://localhost:8080/backend/api/v1/api/admin/update/1`
   - **Obtener Usuarios**: `GET http://localhost:8080/backend/api/v1/api/admin/getUsers`
