@@ -18,9 +18,7 @@ public class NotificationService {
     private KafkaTemplate<String, Notificacion> kafkaTemplate;
 
     public void registrarNotificacion(Notificacion notificacion) {
-        // Guardar la notificación en la base de datos
         notificacionRepository.save(notificacion);
-        // Enviar la notificación a Kafka
         kafkaTemplate.send("notificaciones", notificacion);
     }
 
