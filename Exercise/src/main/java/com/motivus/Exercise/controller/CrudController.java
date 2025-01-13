@@ -38,6 +38,7 @@ public class CrudController {
         return ResponseEntity.ok(crudService.actualizarProducto(id, producto));
     }
 
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long id) {
         crudService.eliminarProducto(id);
