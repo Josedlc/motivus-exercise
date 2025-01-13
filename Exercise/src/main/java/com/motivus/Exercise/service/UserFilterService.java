@@ -23,12 +23,11 @@ public class UserFilterService {
         String outputFilePath = generarNombreArchivoSalida(min, max);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFilePath))) {
-            // Leer el archivo CSV y procesar los registros
             List<User> usuariosFiltrados = reader.lines()
-                    .skip(1) // Saltar la línea de encabezado
-                    .parallel() // Paralelizar el procesamiento
+                    .skip(1)
+                    .parallel()
                     .map(line -> {
-                        String[] fields = line.split(","); // Dividir la línea en campos
+                        String[] fields = line.split(",");
                         Long id = Long.parseLong(fields[0]);
                         String firstName = fields[1];
                         String lastName = fields[2];
@@ -37,12 +36,12 @@ public class UserFilterService {
                         int age = Integer.parseInt(fields[5]);
                         return new User(id, firstName, lastName, email, gender, age);
                     })
-                    .filter(usuario -> usuario.getAge() >= min && usuario.getAge() <= max) // Filtrar por edad
+                    .filter(usuario -> usuario.getAge() >= min && usuario.getAge() <= max)
                     .collect(Collectors.toList());
 
-            // Escribir los usuarios filtrados en un nuevo archivo CSV
+
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath))) {
-                writer.write("id,first_name,last_name,email,gender,age\n"); // Escribir encabezados
+                writer.write("id,first_name,last_name,email,gender,age\n");
                 for (User usuario : usuariosFiltrados) {
                     writer.write(usuario.getId() + "," +
                             usuario.getFirstName() + "," +
@@ -57,13 +56,13 @@ public class UserFilterService {
             e.printStackTrace();
         }
 
-        return outputFilePath; // Retornar la ruta del archivo generado
+        return outputFilePath;
     }
 
     private String generarNombreArchivoSalida(int min, int max) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String fecha = LocalDate.now().format(formatter);
-        return outputPath +"/user-filter-range-"+ min + "-" +max+"-"+ fecha + ".csv"; // Nombre del archivo con la fecha
+        return outputPath +"/user-filter-range-"+ min + "-" +max+"-"+ fecha + ".csv";
     }
 
 }
